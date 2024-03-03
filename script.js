@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
     var ten = ["Văn", "Thị", "Hồng", "Đức", "An", "Mai", "Thu", "Minh", "Tuấn", "Hải", "Dương", "Hạnh", "Phương", "Linh", "Quang", "Nam", "Lâm", "Như", "Tâm", "Giang"];
 
     var tenList = document.getElementById("tenList");
-    var copyButton = document.getElementById("copyButton");
 
     // Hàm tạo tên ngẫu nhiên
     function generateName() {
@@ -15,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var tenDayDu = hoNgauNhien + " " + tenNgauNhien1 + " " + tenNgauNhien2;
             var listItem = document.createElement("li");
             listItem.textContent = tenDayDu;
+            listItem.classList.add("copyable");
             tenList.appendChild(listItem);
         }
     }
@@ -22,17 +22,15 @@ document.addEventListener("DOMContentLoaded", function() {
     // Gọi hàm tạo tên khi trang được tải
     generateName();
 
-    // Sao chép danh sách tên khi nhấn nút "Copy"
-    copyButton.addEventListener("click", function() {
-        var textToCopy = "";
-        var tenItems = tenList.getElementsByTagName("li");
-        for (var i = 0; i < tenItems.length; i++) {
-            textToCopy += tenItems[i].textContent + "\n";
+    // Sao chép từng tên khi nhấn vào tên
+    tenList.addEventListener("click", function(event) {
+        if (event.target.classList.contains("copyable")) {
+            var textToCopy = event.target.textContent;
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                alert("Tên đã được sao chép!");
+            }, function(err) {
+                console.error('Failed to copy text: ', err);
+            });
         }
-        navigator.clipboard.writeText(textToCopy).then(function() {
-            alert("Danh sách đã được sao chép!");
-        }, function(err) {
-            console.error('Failed to copy text: ', err);
-        });
     });
 });

@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
             var tenDayDu = hoNgauNhien + " " + tenNgauNhien1 + " " + tenNgauNhien2;
             var listItem = document.createElement("li");
             listItem.textContent = tenDayDu;
-            listItem.classList.add("copyable");
             tenList.appendChild(listItem);
         }
     }
@@ -24,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Sao chép từng tên khi nhấn vào tên
     tenList.addEventListener("click", function(event) {
-        if (event.target.classList.contains("copyable")) {
+        if (event.target.tagName === "LI") {
             var textToCopy = event.target.textContent;
             navigator.clipboard.writeText(textToCopy).then(function() {
                 alert("Tên đã được sao chép!");

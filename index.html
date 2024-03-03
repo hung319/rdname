@@ -6,9 +6,21 @@
     <title>Danh sách tên</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="dark-theme">
+<body class="light-theme">
     <div class="container">
-        <h1>Danh sách 5 tên đầy đủ Tiếng Việt</h1>
+        <h1>Danh sách tên đầy đủ Tiếng Việt</h1>
+        <div>
+            <label for="gioiTinh">Giới tính:</label>
+            <select id="gioiTinh">
+                <option value="nam">Nam</option>
+                <option value="nu">Nữ</option>
+            </select>
+        </div>
+        <div>
+            <label for="soLuong">Số lượng tên:</label>
+            <input type="number" id="soLuong" value="5" min="1" max="100">
+        </div>
+        <button id="generateButton">Tạo Danh Sách Tên</button>
         <ul id="tenList"></ul>
     </div>
 

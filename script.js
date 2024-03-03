@@ -11,7 +11,14 @@ document.addEventListener("DOMContentLoaded", function() {
     // Hàm tạo tên ngẫu nhiên
     function generateNames() {
         var gioiTinh = gioiTinhSelect.value;
-        var hoList = gioiTinh === "nam" ? hoNam : hoNu;
+        var hoList = [];
+        if (gioiTinh === "nam") {
+            hoList = hoNam;
+        } else if (gioiTinh === "nu") {
+            hoList = hoNu;
+        } else {
+            hoList = hoNam.concat(hoNu);
+        }
         var soLuong = parseInt(soLuongInput.value);
 
         tenList.innerHTML = "";

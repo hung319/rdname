@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     var hoNam = ["Nguyễn", "Trần", "Lê", "Phạm", "Hoàng", "Huỳnh", "Võ", "Đặng", "Bùi", "Đỗ", "Hồ", "Ngô", "Dương", "Lý", "Đào", "Đoàn", "Vương", "Trịnh", "Đinh", "Lưu"];
-    var hoNu = ["Nguyễn Thị", "Trần Thị", "Lê Thị", "Phạm Thị", "Hoàng Thị", "Võ Thị", "Đặng Thị", "Bùi Thị", "Đỗ Thị", "Hồ Thị", "Ngô Thị", "Dương Thị", "Lý Thị", "Đào Thị", "Đoàn Thị", "Vương Thị", "Trịnh Thị", "Đinh Thị", "Lưu Thị"];
-    var ten = ["Văn", "Thị", "Hồng", "Đức", "An", "Mai", "Thu", "Minh", "Tuấn", "Hải", "Dương", "Hạnh", "Phương", "Linh", "Quang", "Nam", "Lâm", "Như", "Tâm", "Giang"];
+    var hoNu = ["Nguyễn Thị", "Trần Thị", "Lê Thị", "Phạm Thị", "Hoàng Thị", "Võ Thị", "Đặng Thị", "Bùi Thị", "Đỗ Thị", "Hồ Thị", "Ngô Thị", "Dương Thị"];
+    var tenNam = ["Văn", "Hữu", "Đức", "Hải", "Dương", "Minh", "Quang", "Khang", "Tuấn", "Anh"];
+    var tenNu = ["Thị", "Hồng", "Mai", "Thu", "Hạnh", "Phương", "Linh", "Như", "Tâm", "Giang"];
+    var tenDemNam = ["Minh", "Quang", "Ngọc", "Đức", "Hữu"];
+    var tenDemNu = ["Ngọc", "Thu", "Bảo", "Mai", "Vân"];
 
     var tenList = document.getElementById("tenList");
     var gioiTinhSelect = document.getElementById("gioiTinh");
@@ -11,22 +14,17 @@ document.addEventListener("DOMContentLoaded", function() {
     // Hàm tạo tên ngẫu nhiên
     function generateNames() {
         var gioiTinh = gioiTinhSelect.value;
-        var hoList = [];
-        if (gioiTinh === "nam") {
-            hoList = hoNam;
-        } else if (gioiTinh === "nu") {
-            hoList = hoNu;
-        } else {
-            hoList = hoNam.concat(hoNu);
-        }
+        var hoList = gioiTinh === "nam" ? hoNam : hoNu;
+        var tenListArr = gioiTinh === "nam" ? tenNam : tenNu;
+        var tenDemList = gioiTinh === "nam" ? tenDemNam : tenDemNu;
         var soLuong = parseInt(soLuongInput.value);
 
         tenList.innerHTML = "";
         for (var i = 0; i < soLuong; i++) {
             var hoNgauNhien = hoList[Math.floor(Math.random() * hoList.length)];
-            var tenNgauNhien1 = ten[Math.floor(Math.random() * ten.length)];
-            var tenNgauNhien2 = ten[Math.floor(Math.random() * ten.length)];
-            var tenDayDu = hoNgauNhien + " " + tenNgauNhien1 + " " + tenNgauNhien2;
+            var tenDemNgauNhien = tenDemList[Math.floor(Math.random() * tenDemList.length)];
+            var tenNgauNhien = tenListArr[Math.floor(Math.random() * tenListArr.length)];
+            var tenDayDu = hoNgauNhien + " " + tenDemNgauNhien + " " + tenNgauNhien;
             var listItem = document.createElement("li");
             listItem.textContent = tenDayDu;
             listItem.classList.add("copyable");
@@ -52,5 +50,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.error('Failed to copy text: ', err);
             });
         }
+    });
+
+    // Ngăn chặn chuột phải
+    document.addEventListener("contextmenu", function(event) {
+        event.preventDefault();
     });
 });
